@@ -32,8 +32,10 @@ struct LoginScene: View {
                 VStack(spacing: 15) {
                     TextField("Email", text: $email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .autocapitalization(.none)
-                        .keyboardType(.emailAddress)
+                        #if os(iOS)
+                            .textInputAutocapitalization(.never)
+                            .keyboardType(.emailAddress)
+                        #endif
                         .nestedAccessibilityIdentifier("email")
 
                     SecureField("Password", text: $password)
@@ -97,79 +99,19 @@ struct LoginScene: View {
                 .nestedAccessibilityIdentifier("footer")
             }
             .padding()
-            .navigationBarHidden(true)
+            #if os(iOS)
+                .navigationBarHidden(true)
+            #endif
             // Root identifier for the entire login scene
             .a11yRoot(isRegistering ? "registration" : "login")
         }
     }
 }
 
-struct LoginDemo_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginScene()
-    }
-}
-
-// MARK: - UI Testing Extensions
-extension LoginScene {
-    /// This is a helper extension to demonstrate how to use the nested identifiers in UI tests
-
-    /// Example UI test function that can be used to test the login flow
-    static func uiTestLogin() -> String {
-        """
-        func testLoginFlow() {
-            let app = XCUIApplication()
-            app.launch()
-
-            // Find elements using the composed identifiers
-            let emailField = app.textFields["login.form.email"]
-            let passwordField = app.secureTextFields["login.form.password"]
-            let signInButton = app.buttons["login.form.button"]
-
-            // Perform login actions
-            emailField.tap()
-            emailField.typeText("user@example.com")
-
-            passwordField.tap()
-            passwordField.typeText("password123")
-
-            signInButton.tap()
-
-            // Verify login was successful (add your own assertions)
+#if DEBUG
+    struct LoginDemo_Previews: PreviewProvider {
+        static var previews: some View {
+            LoginScene()
         }
-        """
     }
-
-    /// Example UI test function that can be used to test the registration flow
-    static func uiTestRegistration() -> String {
-        """
-        func testRegistrationFlow() {
-            let app = XCUIApplication()
-            app.launch()
-
-            // Switch to registration mode
-            app.buttons["login.footer.toggle"].tap()
-
-            // Now identifiers have "registration" as the root
-            let emailField = app.textFields["registration.form.email"]
-            let passwordField = app.secureTextFields["registration.form.password"]
-            let confirmPasswordField = app.secureTextFields["registration.form.confirmPassword"]
-            let registerButton = app.buttons["registration.form.button"]
-
-            // Perform registration actions
-            emailField.tap()
-            emailField.typeText("newuser@example.com")
-
-            passwordField.tap()
-            passwordField.typeText("newpassword123")
-
-            confirmPasswordField.tap()
-            confirmPasswordField.typeText("newpassword123")
-
-            registerButton.tap()
-
-            // Verify registration was successful (add your own assertions)
-        }
-        """
-    }
-}
+#endif
