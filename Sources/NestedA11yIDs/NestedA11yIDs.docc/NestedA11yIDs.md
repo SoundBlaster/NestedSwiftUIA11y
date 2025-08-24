@@ -27,7 +27,7 @@ Add the NestedA11yIDs package to your project:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/NestedA11yIDs.git", from: "1.0.0")
+    .package(url: "https://github.com/SoundBlaster/NestedA11yIDs.git", from: "1.0.0")
 ]
 ```
 

@@ -21,13 +21,13 @@ Instead of managing lengthy, error-prone string literals throughout your codebas
 VStack {
     Text("Welcome")
         .accessibilityIdentifier("login_welcome_title")
-        
+
     TextField("Email", text: $email)
         .accessibilityIdentifier("login_email_field")
-        
+
     SecureField("Password", text: $password)
         .accessibilityIdentifier("login_password_field")
-        
+
     Button("Sign In") {
         // Action
     }
@@ -41,13 +41,13 @@ VStack {
 VStack {
     Text("Welcome")
         .nestedAccessibilityIdentifier("title")
-        
+
     TextField("Email", text: $email)
         .nestedAccessibilityIdentifier("email")
-        
+
     SecureField("Password", text: $password)
         .nestedAccessibilityIdentifier("password")
-        
+
     Button("Sign In") {
         // Action
     }
@@ -71,7 +71,7 @@ Add NestedA11yIDs to your `Package.swift` file:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/NestedA11yIDs.git", from: "1.0.0")
+    .package(url: "https://github.com/SoundBlaster/NestedA11yIDs.git", from: "1.0.0")
 ]
 ```
 
@@ -88,18 +88,18 @@ import NestedA11yIDs
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
-    
+
     var body: some View {
         VStack {
             Text("Welcome Back")
                 .nestedAccessibilityIdentifier("title")
-                
+
             TextField("Email", text: $email)
                 .nestedAccessibilityIdentifier("email")
-                
+
             SecureField("Password", text: $password)
                 .nestedAccessibilityIdentifier("password")
-                
+
             Button("Sign In") {
                 // Action
             }
@@ -120,15 +120,15 @@ VStack {
             .nestedAccessibilityIdentifier("title")
     }
     .nestedAccessibilityIdentifier("header")
-    
+
     // Form section
     VStack {
         TextField("Email", text: $email)
             .nestedAccessibilityIdentifier("email")
-            
+
         SecureField("Password", text: $password)
             .nestedAccessibilityIdentifier("password")
-        
+
         Button("Register") {
             // Action
         }
@@ -172,7 +172,7 @@ This means:
 
 ## Documentation
 
-For more detailed documentation, build the DocC documentation included with the package or visit the [Documentation Website](https://yourusername.github.io/NestedA11yIDs/documentation/nesteda11yids).
+For more detailed documentation, build the DocC documentation included with the package or visit the [Documentation Website](https://soundblaster.github.io/NestedA11yIDs/documentation/nesteda11yids).
 
 ## License
 
