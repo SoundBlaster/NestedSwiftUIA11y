@@ -14,13 +14,13 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../../")  // Assuming the root NestedSwiftUIA11y package is two levels up
+        .package(name: "NestedSwiftUIA11y", path: "../../")
     ],
     targets: [
         .executableTarget(
             name: "LoginDemo",
             dependencies: [
-                .product(name: "NestedA11yIDs", package: "NestedSwiftUIA11y")  // Assuming "NestedA11yIDs" is product name of the main package
+                .product(name: "NestedA11yIDs", package: "NestedSwiftUIA11y")
             ],
             path: ".",
             exclude: ["LoginSceneUITests.swift"],
